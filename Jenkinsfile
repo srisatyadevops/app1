@@ -26,12 +26,6 @@ pipeline {
             }
         }
 
-        stage('Cloning GIT'){
-            steps{
-                git 'https://github.com/srisatyadevops/app1.git'
-            }
-        }
-
         stage('Build Docker Image'){
             steps {
                 script{
