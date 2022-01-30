@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerfile true}
+    agent any
     environment{
         registry = "srisatyadevops/app1"
         registryCredential = '2f08ea5b-393d-4f28-b054-8cf2bad60257' 
