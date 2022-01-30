@@ -26,6 +26,23 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image'){
+            steps {
+                script{
+                    dockerImage = docker.build srisatyadevops/app1:$BUILD_TAG
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub'){
+            steps{
+                script{
+                    docker.withRegistry('','2f08ea5b-393d-4f28-b054-8cf2bad60257'){
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
     }
 
     post {
