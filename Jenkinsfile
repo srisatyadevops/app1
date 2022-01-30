@@ -29,7 +29,7 @@ pipeline {
         stage('Build Docker Image'){
             steps {
                 script{
-                    dockerImage = docker.build srisatyadevops/app1:$BUILD_TAG
+                    dockerImage = docker.build srisatyadevops/app1
                 }
             }
         }
