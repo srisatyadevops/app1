@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { dockerfile true}
     environment{
         registry = "srisatyadevops/app1"
         registryCredential = '2f08ea5b-393d-4f28-b054-8cf2bad60257' 
@@ -25,14 +25,25 @@ pipeline {
                 echo "Starting Deployment"
             }
         }
-    }
 
-    node {
-        checkout scm
-        def customImage = docker.build("srisatyadevops/app1:{env.BUILD_ID}")
-        customeImage.push()
-        
-        customImage.push('latest')
+        stage('Build Docker Image'){
+            steps {
+                customImage = docker.build("srisatyadevops/app1:{env.BUILD_TAG}")
+            }
+        }
+
+        stage('Push image to docker hub'){
+            steps {
+                script{
+                    docker.withRegistry('', 'dockerhub'){
+                        customeImage.push()
+                        customeImage.push('latest')
+
+                    }
+                }
+
+            }
+        }
     }
 
     post {
