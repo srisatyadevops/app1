@@ -28,7 +28,9 @@ pipeline {
 
         stage('Build Docker Image'){
             steps {
-                customImage = docker.build("srisatyadevops/app1:{env.BUILD_TAG}")
+                script{
+                    customImage = docker.build("srisatyadevops/app1:{env.BUILD_TAG}")
+                }
             }
         }
 
